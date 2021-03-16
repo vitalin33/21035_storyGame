@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div>.swa12-title{
+            font-size: 1.6em;
+            text-align: left;
+
+        }
+        body{
+            background-image:url("https://images.unsplash.com/photo-1591517911679-c48a7dd753cd?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80");
+            background-repeat: no-repeat;
+            background-size: cover;
+    
+
+        }
+
+</style>
+<link rel="stylesheet" href="bower_components/sweetalert2/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="bower_components/sweetalert2/dist/sweetalert2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+<script src="https://www.jsdelivr.com/package/npm/sweetalert2。"></script>
+</head>
+<body>
+    <script>
+        var name;
+        Swal.fire({ 
+                title: '這是充滿奇幻的旅程，如果想要開始，先告訴我你是誰吧！', //標題
+                input: 'text', //輸入欄位的類型
+                inputValue: '希爾菲斯', //欄位預設值
+                showLoaderOnConfirm: true, //啟用輸入框
+                confirmButtonText: '我是............', //確定按鈕之文字
+                cancelButtonText: '聽起來好可怕，我還是不去了', //取消按鈕之文字
+                showCancelButton: true, //提供取消按鈕
+                allowOutsideClick: false, //是窗外的按鈕可否觸發取消事件
+                confirmButtonColor: '#9dbf00',
+                
+        }).then(function (result) {
+                if (result.dismiss === 'cancel') {
+                Swal.fire({
+                    title: '太可惜了，你會因為錯過這個機會而後悔的！',
+                    confirmButtonText: '我還是繼續我庸庸碌碌的平凡人生就好！',
+
+                }).then(function(){
+                    $('body').css('background-image','url(img/sad_bye.jpg)');
+                });
+                }
+                else {
+                name = result.value;
+                Swal.fire({
+                    title: `${name}這的名字很符合這個故事呢！`,
+                    text: '我已經迫不及待想和您一起開始這段旅程了！',
+                    allowOutsideClick: false,
+                    imageUrl: 'img/5697295_orig.jpg',
+                    imageHeight: 300,
+                    confirmButtonColor: '#9dbf00',
+                }).then(start);
+                }
+            });
+
+gameplay();
+
+var score;
+
+function start() { 
+
+    score=0;
+    let mission;
+        Swal.fire({
+        title: `${name}，你的職業是....`,
+        confirmButtonText:'騎士',
+        cancelButtonText: '米蟲',
+        showCancelButton: true,
+        allowOutsideClick: false,
+        imageUrl: 'img/job.jpg',
+        imageHeight: 300,
+        confirmButtonColor: '#9dbf00',
+        cancelButtonColor: '#d33'
+         }).then((result) => {                      //--------------swal(1)
+            if (result.dismiss === 'cancel') {                   
+                Swal.fire({
+                title: `米蟲!?米蟲!? `,
+                text:'你回去好好想想再來吧！(踢)',
+                allowOutsideClick: false,
+                confirmButtonColor: '#9dbf00',
+                imageUrl: 'img/captain3.jpg',
+                imageHeight: 300
+             });//--------------swal(2)
+            } //-----------if(1)
+            else {                                               
+            Swal.fire({
+                title: `村長：勇敢的騎士大人，有您的到來太令我們振奮了`,
+                text:'最近村子裡很不平靜，希望您能幫幫我們',
+                allowOutsideClick: false,
+                imageUrl: 'img/host.jpg',
+                imageHeight: 300,
+                confirmButtonText:'沒有問題，這是我的使命',
+                cancelButtonText: '我正往皇城趕去，可能沒有時間',
+                confirmButtonColor: '#9dbf00',
+                cancelButtonColor: '#d33',
+                showCancelButton: true,
+            }).then((result) => {
+                if (result.dismiss === 'cancel'){                        
+                        score=score-100;
+                     Swal.fire({
+                    title: `對於人民有難視而不見`,
+                    text:'很遺憾，因為你缺乏騎士精神，在人民心中的評價-100。',
+                    allowOutsideClick: false,
+                    confirmButtonColor: '#9dbf00',
+                    imageUrl: 'img/me_score.jpg',
+                    imageHeight: 300
+                     }).then(level2); //------------swal(3)
+                    }   //-----------if(2)
+                    else {                                                      
+                    score=score+100;
+                    Swal.fire({
+                    title: `成功救回村長的妹妹`,
+                    text:'村長為表感激，寫了一份快報到皇城秉明，騎士評價+100。',
+                    allowOutsideClick: false,
+                    confirmButtonColor: '#9dbf00',
+                    imageUrl: 'img/host_sister.jpg',
+                    imageHeight: 300
+                     }).then(level2);
+                    }
+            });
+        };
+         });
+        };     
+
+            function level2(){
+                        Swal.fire({
+                        title: `皇城騎士團團長：你怎麼現在才來報到？`,
+                        text:'郊外出現了一頭魔獸很厲害，我們必須趁晚上牠的敏捷度降低時解決它！出發吧！',
+                        confirmButtonText:'是！',
+                        confirmButtonColor: '#9dbf00',
+                        imageUrl: 'img/captain2.jpg',
+                        }).then(function(){         //------------------swal(4)
+                            Swal.fire({
+                            title: `騎士團團長：等等看到我手勢一下，你繞到牠的身後`,
+                            text:'這頭魔獸的弱點在脊髓由上往下數第七節，機會只有一次，別失手了！',
+                            allowOutsideClick: false,
+                            imageUrl: 'img/captain5.jpg',
+                            imageHeight: 300,
+                            confirmButtonText:'跟著團長的指揮，一刀下去乾淨俐落',
+                            cancelButtonText: '啊啊啊！跌倒了！',
+                            confirmButtonColor: '#9dbf00',
+                            cancelButtonColor: '#d33',
+                            showCancelButton: true, 
+                            }).then((result) => {//------------------swal(5)
+                                 if (result.dismiss === 'cancel'){                       
+                                    score=score-100;
+                                    Swal.fire({
+                                    title: `團長撲過來救你身受重傷`,
+                                    text:'魔獸逃脫、團長傷重，因為你的辦事不力在人民心中的評價-100。',
+                                    allowOutsideClick: false,
+                                    confirmButtonColor: '#9dbf00',
+                                    imageUrl: 'img/captain.jpg',
+                                    imageHeight: 300
+                                    }).then(level3); //------------------swal(6)
+                                } //----------if(3)
+                                else{
+                                    score=score+100;
+                                    Swal.fire({
+                                    title: `準確的一擊`,
+                                    text:'魔獸鏘然倒地，團長對於你的表現大感滿意，騎士評價+100。',
+                                    allowOutsideClick: false,
+                                    confirmButtonColor: '#9dbf00',
+                                    imageUrl: 'img/attack.jpg',
+                                    imageHeight: 300
+                                    }).then(level3);
+                                }//-----------else(3)
+                            });//--------then(5)       
+                        });   
+            };                        
+                         
+            function level3(){
+                        Swal.fire({
+                        title: `同團實習生在路上遇到危險`,
+                        text:'對方多打一，同團實習生寡不敵眾，此時要...........?',
+                            allowOutsideClick: false,
+                            imageUrl: 'img/friend6.jpg',
+                            imageHeight: 300,
+                            confirmButtonText:'出手幫忙',
+                            cancelButtonText: '視而不見',
+                            confirmButtonColor: '#9dbf00',
+                            cancelButtonColor: '#d33',
+                            showCancelButton: true, 
+                            }).then((result) => {//------------------swal(5)
+                                 if (result.dismiss === 'cancel'){                       
+                                    score=score-100;
+                                    Swal.fire({
+                                    title: `實習生受傷`,
+                                    text:'團長得知後，怒斥你沒有團隊精神，騎士評價-100',
+                                    allowOutsideClick: false,
+                                    confirmButtonColor: '#9dbf00',
+                                    imageUrl: 'img/friend2.jpg',
+                                    imageHeight: 300
+                                    }).then(level4); //------------------swal(6)
+                                } //----------if(3)
+                                else{
+                                    score=score+100;
+                                    Swal.fire({
+                                    title: `成功擊退混混`,
+                                    text:'實習生對你的出手相助大表感激，決定從今天起和你斬雞燒黃紙，評價+100',
+                                    allowOutsideClick: false,
+                                    confirmButtonColor: '#9dbf00',
+                                    imageUrl: `img/friend5.jpg`,
+                                    imageHeight: 300
+                                    }).then(level4);
+                                }
+                            });  
+                        };   
+         
+            function level4(){
+                Swal.fire({
+                    title: `咦？前面那個不是這陣子剛來皇城的吟遊詩人嗎？`,
+                    text:'臉色看起來怎麼這麼糟，問問看好了！',
+                    allowOutsideClick: false,
+                    imageUrl: 'img/ylis.jpg',
+                    imageHeight: 300,
+                    confirmButtonText:'你還好嗎？有哪裡不舒服嗎？',
+                    cancelButtonText: '你還好嗎？是不是要窮死了？',
+                    confirmButtonColor: '#9dbf00',
+                    cancelButtonColor: '#d33',
+                    showCancelButton: true, 
+                    }).then((result) => {
+                        if (result.dismiss === 'cancel'){
+                            score=score-300;
+                            Swal.fire({
+                            title: `聽到你的問法，吟遊詩人深感自己受辱`,
+                            text:'突然喉頭一甜，吟遊詩人緊忙捂住嘴離開，評價-300。',
+                            allowOutsideClick: false,
+                            confirmButtonColor: '#9dbf00',
+                            imageUrl: 'img/ylis8.jpg',
+                            imageHeight: 300
+                            }).then(level5); 
+                        }
+                        else{
+                            Swal.fire({
+                            title: `吟遊詩人抬起頭看著你，問道：「你有辦法幫我嗎？」`,
+                            text:'看著吟遊詩人慘白的臉色，你心中漾起一股不妙的感覺......',
+                            allowOutsideClick: false,
+                            imageUrl: 'img/ylis02.jpg',
+                            imageHeight: 300,
+                            confirmButtonText:'身為保護人民的騎士，不管你遇到什麼難題都請告訴我吧！',
+                            cancelButtonText: '我可能....還是沒有辦法',
+                            confirmButtonColor: '#9dbf00',
+                            cancelButtonColor: '#d33',
+                            showCancelButton: true, 
+                            }).then((result) => {
+                                if (result.dismiss === 'cancel'){                       
+                                    score=score-100;
+                                    Swal.fire({
+                                    title: `吟遊詩人聽罷，也沒多說什麼`,
+                                    text:'只見他再次拿起了隨身的家傳長笛，轉身離開，因為幫不上忙，評價-100。',
+                                    allowOutsideClick: false,
+                                    confirmButtonColor: '#9dbf00',
+                                    imageUrl: 'img/ylis03.jpg',
+                                    imageHeight: 300
+                                    }).then(level5);  
+                                } 
+                                else{
+                                    Swal.fire({
+                                    title: `聽到你的詢問，吟遊詩人拿起了隨身的家傳長笛吹奏起來`,
+                                    text:'奇怪的是，雖然聽到的是笛聲，但卻能知道吟遊詩人想講的故事',
+                                    allowOutsideClick: false,
+                                    imageUrl: 'img/ylis03.jpg',
+                                    imageHeight: 300,
+                                    confirmButtonText:'是詛咒....而解救你的方法，是犧牲...',
+                                    cancelButtonText: '(裝聽不懂)很抱歉，我還是不能理解能幫你什麼。',
+                                    confirmButtonColor: '#9dbf00',
+                                    cancelButtonColor: '#d33',
+                                    showCancelButton: true, 
+                                    }).then((result) => {
+                                        if (result.dismiss === 'cancel'){                       
+                                            score=score-100;
+                                            Swal.fire({
+                                            title: `吟遊詩人聽罷，也沒多說什麼`,
+                                            text:'只見他再次拿起了隨身的家傳長笛，轉身離開，因為幫不上忙，評價-100。',
+                                            allowOutsideClick: false,
+                                            confirmButtonColor: '#9dbf00',
+                                            imageUrl: 'img/ylis03.jpg',
+                                            imageHeight: 300
+                                            }).then(level5);  
+                                        } 
+                                        else{
+                                            Swal.fire({
+                                            title: `你破解了笛聲背後的故事，吟遊詩人身邊的空氣開始出現變化`,
+                                            text:'突然有一雙手爬上了吟遊詩人的胸口，一個灰色的身影乍然出現',
+                                            allowOutsideClick: false,
+                                            imageUrl: 'img/ghost.jpg',
+                                            imageHeight: 300,
+                                            confirmButtonText:'是妳！故事裡的邦希，詛咒的來源！',
+                                            cancelButtonText: '看到邦希出現的你，嚇得落荒而逃',
+                                            confirmButtonColor: '#9dbf00',
+                                            cancelButtonColor: '#d33',
+                                            showCancelButton: true, 
+                                            }).then((result) => {
+                                                if (result.dismiss === 'cancel'){                       
+                                                    score=score-100;
+                                                    Swal.fire({
+                                                    title: `因為你的逃跑，吟遊詩人的魂魄被邦希帶入了地獄`,
+                                                    text:'居民幫吟遊詩人辦了葬禮，雖然不知道發生了什麼事，但對你的評價再次降低了，評價-100。',
+                                                    allowOutsideClick: false,
+                                                    confirmButtonColor: '#9dbf00',
+                                                    imageUrl: 'img/ylis01.jpg',
+                                                    imageHeight: 300
+                                                    }).then(level5);  
+                                                } 
+                                                else{
+                                                    Swal.fire({
+                                                    title: `仔細一看，邦希的眼中閃著紅光，嘴角揚起一股邪笑`,
+                                                    text:'命定之人啊！我已吸取生生代代的吟遊家族魂魄，如果你願意...則可解了吟遊家族的千年詛咒，但.....會變成你家族的千年詛咒........',
+                                                    allowOutsideClick: false,
+                                                    imageUrl: 'img/bpnc.jpg',
+                                                    imageHeight: 300,
+                                                    confirmButtonText:'你眼神堅定地看向邦希，向前走了一步',
+                                                    cancelButtonText: '你猶豫了一下，轉身離開了..',
+                                                    confirmButtonColor: '#9dbf00',
+                                                    cancelButtonColor: '#d33',
+                                                    showCancelButton: true, 
+                                                    }).then((result) => {
+                                                        if (result.dismiss === 'cancel'){                       
+                                                            score=score-100;
+                                                            Swal.fire({
+                                                            title: `因為你的離開，吟遊詩人的魂魄被邦希帶入了地獄`,
+                                                            text:'居民幫吟遊詩人辦了葬禮，雖然不知道發生了什麼事，但對你的評價再次降低了，評價-100。',
+                                                            allowOutsideClick: false,
+                                                            confirmButtonColor: '#9dbf00',
+                                                            imageUrl: 'img/ylis01.jpg',
+                                                            imageHeight: 300
+                                                            }).then(level5);  
+                                                            } 
+                                                        else{
+                                                            Swal.fire({
+                                                            title: `邦希看著你的無畏，倒是略略驚訝`,
+                                                            text:'你真的願意？',
+                                                            allowOutsideClick: false,
+                                                            imageUrl: 'img/bonci02.png',
+                                                            imageHeight: 300,
+                                                            confirmButtonText:'願意，我是人民的守護者！這是身為騎士的職責！',
+                                                            cancelButtonText: '你猶豫了一下，轉身離開了..',
+                                                            confirmButtonColor: '#9dbf00',
+                                                            cancelButtonColor: '#d33',
+                                                            showCancelButton: true, 
+                                                            }).then((result) => {
+                                                                if (result.dismiss === 'cancel'){                       
+                                                                    score=score-100;
+                                                                    Swal.fire({
+                                                                    title: `因為你的離開，吟遊詩人的魂魄被邦希帶入了地獄`,
+                                                                    text:'居民幫吟遊詩人辦了葬禮，雖然不知道發生了什麼事，但對你的評價再次降低了，評價-100。',
+                                                                    allowOutsideClick: false,
+                                                                    confirmButtonColor: '#9dbf00',
+                                                                    imageUrl: 'img/ylis01.jpg',
+                                                                    imageHeight: 300
+                                                                    }).then(level5);  
+                                                                }
+                                                                else{
+                                                                    score=score+800;
+                                                                    Swal.fire({
+                                                                    title: `突然一陣白光閃過，伴隨著由尖銳變成輕快的笑聲`,
+                                                                    text:'謝謝你，救了吟遊家族，也拯救了我...我終於不用...再傷害我心愛之人的子子孫孫了....',
+                                                                    allowOutsideClick: false,
+                                                                    imageUrl: 'img/bonci04.jpg',
+                                                                    imageHeight: 300,
+                                                                    confirmButtonText:'看著昏迷的吟遊詩人，你趕緊將他送去救治',
+                                                                    confirmButtonColor: '#9dbf00',
+                                                                    cancelButtonColor: '#d33',
+                                                                    }).then(function(){
+                                                                        Swal.fire({
+                                                                        title: `是你....? 你成功了...?`,
+                                                                        text:'悠悠轉醒的吟遊詩人為了報答你，指引你於今天下午2:22到皇城主廣場一趟',
+                                                                        allowOutsideClick: false,
+                                                                        imageUrl: 'img/31491598.jpg',
+                                                                        imageHeight: 300,
+                                                                        confirmButtonText:'謝謝你，請務必好好保重自己',
+                                                                        confirmButtonColor: '#9dbf00',
+                                                                    }).then(level5);  
+                                                                    });
+                                                                }
+                                                    
+
+                                                            });
+                                                        }    
+                                                    });
+                                                }
+                                            });
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    });
+                
+            };
+
+            let male=0, female=0;
+
+                function level5(){
+                            Swal.fire({
+                            title: `到了主廣場，居然遇到了皇太子被暗殺`,
+                            text:'刺客一看到你轉身逃跑，你看著倒地的皇太子跟離去的刺客，陷入兩難',
+                            allowOutsideClick: false,
+                            imageUrl: 'img/friend.jpg',
+                            imageHeight: 300,
+                            confirmButtonText:'救皇太子',
+                            cancelButtonText: '追刺客',
+                            confirmButtonColor: '#9dbf00',
+                            cancelButtonColor: '#d33',
+                            showCancelButton: true, 
+                            }).then((result) => {
+                                 if (result.dismiss === 'cancel'){                       
+                                    Swal.fire({
+                                    title: `你招來其他團員後，快速奔去捉拿刺客`,
+                                    text:'但拐了一個彎刺客就消失了，轉角處屹立著皇城歷史悠久的神宮，要進去看看嗎？',
+                                    allowOutsideClick: false,
+                                    imageUrl: 'img/prince2.jpg',
+                                    imageHeight: 300,
+                                    confirmButtonText:'去看看',
+                                    cancelButtonText: '算了，還是趕緊看看皇太子的狀況',
+                                    confirmButtonColor: '#9dbf00',
+                                    cancelButtonColor: '#d33',
+                                    showCancelButton: true, 
+                                    }).then((result) => {
+                                        if (result.dismiss === 'cancel'){                       
+                                            Swal.fire({
+                                            title: `回到廣場後，團長跟你談起皇太子送醫狀況`,
+                                            text:'同時說起皇太子在昏迷前提到要召見你的消息',
+                                            allowOutsideClick: false,
+                                            confirmButtonText:'知道了。',
+                                            confirmButtonColor: '#9dbf00',
+                                            imageUrl: 'img/captain3.jpg',
+                                            imageHeight: 300
+                                            }).then(level6);  
+                                        }
+                                        else{
+                                            Swal.fire({
+                                            title: `進到神殿，一身白袍的女神官笑臉盈盈地看著你`,
+                                            text:'忙碌的騎士，今天來到神宮，想對天上的諸神傾訴什麼嗎？',
+                                            allowOutsideClick: false,
+                                            imageUrl: 'img/palace.jpeg',
+                                            imageHeight: 300,
+                                            confirmButtonText:'你倏地拔劍相向，神官措手不及',
+                                            cancelButtonText: '沒事，回廣場看看吧！',
+                                            confirmButtonColor: '#9dbf00',
+                                            cancelButtonColor: '#d33',
+                                            showCancelButton: true, 
+                                            }).then((result) => {
+                                                if (result.dismiss === 'cancel'){                       
+                                                    Swal.fire({
+                                                        title: `回到廣場後，團長跟你談起皇太子送醫狀況`,
+                                                        text:'同時說起皇太子在昏迷前提到要召見你的消息',
+                                                        allowOutsideClick: false,
+                                                        confirmButtonText:'知道了。',
+                                                        confirmButtonColor: '#9dbf00',
+                                                        imageUrl: 'img/captain3.jpg',
+                                                        imageHeight: 300
+                                                        }).then(level6);  
+                                                }
+                                                else{
+                                                    score=score+800;
+                                                    Swal.fire({
+                                                    title: `神官撫著傷口：「怎麼可能！！不可能有破綻啊！」`,
+                                                    text:'被你傷著的神官動彈不得，一雙大眼緊盯著你，不知道你下一步要做什麼',
+                                                    allowOutsideClick: false,
+                                                    imageUrl: 'img/kill.jpg',
+                                                    imageHeight: 300,
+                                                    confirmButtonText:'逮捕她！',
+                                                    cancelButtonText: '放了她！',
+                                                    confirmButtonColor: '#9dbf00',
+                                                    cancelButtonColor: '#d33',
+                                                    showCancelButton: true, 
+                                                    }).then((result) => { 
+                                                        if (result.dismiss === 'cancel'){                     
+                                                            Swal.fire({
+                                                            title: `什麼....? 你要放了我...??`,
+                                                            text:'「我記得你了！」語畢，刺客拖著身體消失在神宮一隅。',
+                                                            allowOutsideClick: false,
+                                                            confirmButtonText:'回廣場看看吧！',
+                                                            confirmButtonColor: '#9dbf00',
+                                                            imageUrl: 'img/palace.jpeg',
+                                                            imageHeight: 300
+                                                            }).then(function() { 
+                                                                Swal.fire({
+                                                                title: `回到廣場後，團長跟你談到皇太子送醫狀況`,
+                                                                text:'同時說起皇太子在昏迷前提到要召見你的消息',
+                                                                allowOutsideClick: false,
+                                                                confirmButtonText:'知道了。',
+                                                                confirmButtonColor: '#9dbf00',
+                                                                imageUrl: 'img/captain3.jpg',
+                                                                imageHeight: 300
+                                                                }).then(level6);  
+                                                            });  
+                                                        }
+                                                        else{
+                                                            score=score+200;
+                                                            Swal.fire({
+                                                            title: `你將神官綁起，交給了侍衛軍`,
+                                                            text:'侍衛軍跟你談起皇太子送醫狀況，同時說起皇太子在昏迷前提到要召見你的消息',
+                                                            allowOutsideClick: false,
+                                                            imageUrl: 'img/shiwon.jpg',
+                                                            imageHeight: 300,
+                                                            confirmButtonText:'知道了。',                                    
+                                                            confirmButtonColor: '#9dbf00',
+                                                            cancelButtonColor: '#d33', 
+                                                            }).then(level6);
+                                                        }
+                                                    });
+                                                }
+                                            });
+                                    
+                                        }
+                                    });
+
+                                }
+                                else{
+                                    Swal.fire({
+                                    title: `你匆匆抱起皇太子，往最近的醫館衝去`,
+                                    text:'溫熱的血液浸透了你的制服，也不管雙臂多麼痠疼，你只知道抱著他奮力地衝',
+                                    allowOutsideClick: false,
+                                    imageUrl: 'img/sick.jfif',
+                                    imageHeight: 300,
+                                    confirmButtonText:'快到了，撐著！',                                    
+                                    confirmButtonColor: '#9dbf00',
+                                    cancelButtonColor: '#d33', 
+                                    }).then(function(){
+                                        Swal.fire({
+                                        title: `經過醫療後，皇太子沉沉睡著`,
+                                        text:'肩負守衛責任的你寸步不離，皇太子的妹妹跟侍衛軍隊長來了幾趟，',
+                                        allowOutsideClick: false,
+                                        imageUrl: 'img/sleep.jpg',
+                                        imageHeight: 300,
+                                        confirmButtonText:'皇太子何時才會醒來呢....?',
+                                        confirmButtonColor: '#9dbf00',
+                                        }).then(function(){
+                                            Swal.fire({
+                                            title: `來人，我要水`,
+                                            text:'正撐著頭打著瞌睡的你，一聽到聲音立馬彈起，尋了杯水讓皇太子飲下',
+                                            allowOutsideClick: false,
+                                            imageUrl: 'img/awake.jpg',
+                                            imageHeight: 300,
+                                            confirmButtonText:'您醒了，殿下。',                                    
+                                            confirmButtonColor: '#9dbf00',
+                                            cancelButtonColor: '#d33', 
+                                            }).then(function(){
+                                                Swal.fire({
+                                                title: `你是...?`,
+                                                text:'皇太子張眼環顧四周，滿室的藥水味漸漸喚起他的記憶',
+                                                allowOutsideClick: false,
+                                                imageUrl: 'img/awake.jpg',
+                                                imageHeight: 300,
+                                                confirmButtonText:`皇家騎士團‧${name}`,                                    
+                                                confirmButtonColor: '#9dbf00',
+                                                cancelButtonColor: '#d33', 
+                                                }).then(function(){
+                                                    Swal.fire({
+                                                    title: `是來自安海爾族的${name}啊.....`,
+                                                    text:'我聽過很多你的事蹟，沒想到會是你救了我',
+                                                    allowOutsideClick: false,
+                                                    imageUrl: 'img/awake.jpg',
+                                                    imageHeight: 300,
+                                                    confirmButtonText:`這是我的本份，也是我身為騎士的榮耀`,                                    
+                                                    confirmButtonColor: '#9dbf00',
+                                                    cancelButtonColor: '#d33', 
+                                                    }).then(function(){
+                                                        Swal.fire({
+                                                        title: `只是這樣而已嗎？`,
+                                                        text:`皇太子的眼神穿透了你的內心，不知不覺你說出了自己的心事`,
+                                                        allowOutsideClick: false,
+                                                        imageUrl: 'img/awake.jpg',
+                                                        imageHeight: 300,
+                                                        confirmButtonText:'我想知道自己是誰以及會轉化成怎樣的人',
+                                                        confirmButtonColor: '#9dbf00',
+                                                        }).then(function(){
+                                                            Swal.fire({
+                                                            title: `神秘的安海爾族人`,
+                                                            text:`到青春期前無性別的種族，分化尤隨經歷，皆金髮碧眼，善御魔法`,
+                                                            allowOutsideClick: false,
+                                                            imageUrl: 'img/anheir.jpg',
+                                                            imageHeight: 300,
+                                                            confirmButtonText:'我卻因為自己不會魔法，所以選擇成為騎士',
+                                                            confirmButtonColor: '#9dbf00',
+                                                            }).then(function(){
+                                                                Swal.fire({
+                                                                    title: `謝謝你對皇城的付出`,
+                                                                    text:`你會找到自己的方向的，鑑於你優越的表現，來自安海爾族的${name}，以天上諸神為證，授與你一級騎士的階級`,
+                                                                    allowOutsideClick: false,
+                                                                    imageUrl: 'img/dgoII4h.jpg',
+                                                                    imageHeight: 300,
+                                                                    confirmButtonText:'啊..這..........',
+                                                                    confirmButtonColor: '#9dbf00',
+                                                                }).then(function(){
+                                                                Swal.fire({
+                                                                    title: `去吧！再好好遊歷，找到屬於你的人生`,
+                                                                    text:`皇太子揮了揮手，再次闔上了眼睛休息，只是你在關門離開的那一刻似乎聽到了皇太子的低語.........`,
+                                                                    allowOutsideClick: false,
+                                                                    imageUrl: 'img/sleep.jpg',
+                                                                    imageHeight: 300,
+                                                                    confirmButtonText:`「有${name}....真好」是嗎`,
+                                                                    confirmButtonColor: '#9dbf00',
+                                                                }).then(choice);
+                                                            })
+                                                            })
+                                                    });
+                                                    })
+                                                })
+                                            })
+                                        })
+
+                                    })
+
+                                }
+    
+                        });
+                        
+                };  
+            
+          
+
+            function level6(){
+                if (score>500){
+                    Swal.fire({
+                    title: `皇太子召見`,
+                    text:'躺在床上的皇太子看起來有點虛弱，不知道找我做什麼',
+                    allowOutsideClick: false,
+                    imageUrl: 'img/sleep.jpg',
+                    imageHeight: 300,
+                    confirmButtonText:'靜靜待在一旁',
+                    cancelButtonText: '自報名號',
+                    confirmButtonColor: '#9dbf00',
+                    cancelButtonColor: '#d33',
+                    showCancelButton: true, 
+                    }).then((resule) => {
+                        if(resule.dismiss === 'cancel'){
+                                score=score-100;
+                                Swal.fire({
+                                title: `驚醒了皇太子`,
+                                text:'皇太子看著你的眼神有點無奈，揮了揮手讓你離開了。',
+                                allowOutsideClick: false,
+                                imageUrl: 'img/awake.jpg',
+                                imageHeight: 300,
+                                confirmButtonText:'轉身退下',
+                                confirmButtonColor: '#9dbf00',
+                            }).then(normal_end);
+                         } 
+                         else{
+                                Swal.fire({
+                                title: `皇太子悠悠轉醒`,
+                                text:`你就是來自安海爾族的${name}?我聽了你很多事績..`,
+                                allowOutsideClick: false,
+                                imageUrl: 'img/awake.jpg',
+                                imageHeight: 300,
+                                confirmButtonText:'承蒙殿下不棄，我只是遵從騎士團的信念而已',
+                                confirmButtonColor: '#9dbf00',
+                                }).then(function(){
+                                        Swal.fire({
+                                        title: `只是這樣而已嗎？`,
+                                        text:`皇太子的眼神穿透了你的內心，不知不覺你說出了自己的心事`,
+                                        allowOutsideClick: false,
+                                        imageUrl: 'img/awake.jpg',
+                                        imageHeight: 300,
+                                        confirmButtonText:'我想知道自己是誰以及會轉化成怎樣的人',
+                                        confirmButtonColor: '#9dbf00',
+                                    }).then(function(){
+                                            Swal.fire({
+                                            title: `神秘的安海爾族人`,
+                                            text:`到青春期前無性別的種族，分化尤隨經歷，皆金髮碧眼，善御魔法`,
+                                            allowOutsideClick: false,
+                                            imageUrl: 'img/anheir.jpg',
+                                            imageHeight: 300,
+                                            confirmButtonText:'我卻因為自己不會魔法，所以選擇成為騎士',
+                                            confirmButtonColor: '#9dbf00',
+                                            }).then(function(){
+                                                Swal.fire({
+                                                    title: `謝謝你對皇城的付出`,
+                                                    text:`你會找到自己的方向的，鑑於你優越的表現，來自安海爾族的${name}，以天上諸神為證，授與你一級騎士的階級`,
+                                                    allowOutsideClick: false,
+                                                    imageUrl: 'img/dgoII4h.jpg',
+                                                    imageHeight: 300,
+                                                    confirmButtonText:'啊..這..........',
+                                                    confirmButtonColor: '#9dbf00',
+                                                }).then(function(){
+                                                Swal.fire({
+                                                    title: `去吧！再好好遊歷，找到屬於你的人生`,
+                                                    text:`皇太子揮了揮手，再次闔上了眼睛休息，只是你在關門離開的那一刻似乎聽到了皇太子的低語.........`,
+                                                    allowOutsideClick: false,
+                                                    imageUrl: 'img/sleep.jpg',
+                                                    imageHeight: 300,
+                                                    confirmButtonText:`「有${name}....真好」是嗎`,
+                                                    confirmButtonColor: '#9dbf00',
+                                                }).then(choice);
+                                            })
+                                            })
+                                    });
+                                })
+                         }
+
+                    })
+
+                }
+                 else if( score < 500 && score > 0 ) {
+                    normal_end();
+                 }
+                  else if ( score <= 0){
+                        Swal.fire({
+                        title: `皇太子召見完後，團長又來找我`,
+                        text:'很抱歉，經過了這段時間的評估，你達不到我們騎士團的標準，請從今天開始離訓吧！',
+                        allowOutsideClick: false,
+                        imageUrl: 'img/viligh.jpg',
+                        imageHeight: 300,
+                        confirmButtonText:'你就這樣被送回了安海爾村，一切經歷都白費了',
+                        confirmButtonColor: '#9dbf00',
+                        });
+                  }
+            }
+
+
+                function normal_end(){
+                    Swal.fire({
+                        title: `皇太子召見完後，團長又來找我`,
+                        text:'這陣子你很努力了，但還是欠缺很多，和實習生一起好好磨練吧！',
+                        allowOutsideClick: false,
+                        imageUrl: 'img/friend3.jpg',
+                        imageHeight: 300,
+                        confirmButtonText:'我願一直追隨團長，直到自己可以獨當一面為止',
+                        confirmButtonColor: '#9dbf00',
+                        }).then(function(){
+                            Swal.fire({
+                            title: `多年後，你成了騎士團團長`,
+                            text:'我喜歡這裡的人民，被需要跟愛，我願為他們繼續奮鬥到我倒下為止',
+                            allowOutsideClick: false,
+                            imageUrl: 'img/5697295_orig.jpg',
+                            imageHeight: 300,
+                            confirmButtonText:'用生命守護每個人幸福的笑容',
+                            confirmButtonColor: '#9dbf00',
+                    })
+                        })
+
+
+                }       
+    
+                
+    
+    function choice(){
+        var loveA=0,loveB=0,female=0,male=0;
+               Swal.fire({
+               title: `我.......會怎樣呢...?`,
+               text:'來到皇城已經一年的時間，認識了很多人，也經歷了很多事，我卻還沒有任何改變，難道當初是長老想錯了嗎......',
+               allowOutsideClick: false,
+               imageUrl: 'img/me_score.jpg',
+               imageHeight: 300,
+               confirmButtonText:'我該怎麼辦..',
+               confirmButtonColor: '#9dbf00',
+               }).then(function(){
+                   Swal.fire({
+                   title: `突然一道刺眼的白光，睜眼後卻到了一個異空間`,
+                   text:`一個金髮碧眼的女子出現，${name}定睛一看，這不是族裡長久信奉的.........`,
+                   allowOutsideClick: false,
+                   imageUrl: 'img/aibe.jpg',
+                   imageHeight: 300,
+                   confirmButtonText:'艾貝女神...?',
+                   confirmButtonColor: '#9dbf00',
+                   }).then(function(){
+                       Swal.fire({
+                       title: `知道了你的迷惘，也是時候讓你前往人生下一個階段了`,
+                       text:`接下來的問題，將會決定你的人生變化，想著你過去的經歷，好好回答吧...`,
+                       allowOutsideClick: false,
+                       imageUrl: 'img/aibe.jpg',
+                       imageHeight: 300,
+                       confirmButtonText:'.................',
+                       confirmButtonColor: '#9dbf00',
+                       }).then(function(){
+                           Swal.fire({
+                           title: `那麼...第一個問題...`,
+                           text:`你喜歡草莓還是巧克力？`,
+                           allowOutsideClick: false,
+                           imageUrl: 'img/aibe.jpg',
+                           imageHeight: 300,
+                           confirmButtonText:'草莓',
+                           cancelButtonText: '巧克力',
+                           confirmButtonColor: '#9dbf00',
+                           cancelButtonColor: '#d33',
+                           showCancelButton: true, 
+                           }).then((result)=>{
+                               if(result.dismiss === 'cancel'){
+                                       loveB=loveB+10;
+                               }
+                               else{
+                                       loveA=loveA+20;
+                               }
+                           }).then(function(){
+                               Swal.fire({
+                               title: `...第二個問題...`,
+                               text:`喜歡逛精品商場還是家附近的雜貨店？`,
+                               allowOutsideClick: false,
+                               imageUrl: 'img/aibe.jpg',
+                               imageHeight: 300,
+                               confirmButtonText:'精品商場',
+                               cancelButtonText: '家附近的雜貨店',
+                               confirmButtonColor: '#9dbf00',
+                               cancelButtonColor: '#d33',
+                               showCancelButton: true, 
+                               }).then((result)=>{
+                                   if(result.dismiss === 'cancel'){
+                                       loveB=loveB+10;
+                                   }else{
+                                       loveA=loveA+20;
+                                   }
+                               }).then(function(){
+                                   Swal.fire({
+                                   title: `...第三個問題...`,
+                                   text:`喜歡藍色還是粉紅色呢？`,
+                                   allowOutsideClick: false,
+                                   imageUrl: 'img/aibe.jpg',
+                                   imageHeight: 300,
+                                   confirmButtonText:'藍色',
+                                   cancelButtonText: '粉紅色',
+                                   confirmButtonColor: '#9dbf00',
+                                   cancelButtonColor: '#d33',
+                                   showCancelButton: true, 
+                                   }).then((result)=>{
+                                       if(result.dismiss === 'cancel'){
+                                           loveA=loveA+20;
+                                       }else{
+                                           loveB=loveB+10;
+                                       }
+                                   }).then(function(){
+                                       Swal.fire({
+                                       title: `...第四個問題...`,
+                                       text:`你是個拘謹守禮的人，還是熱愛自由的人？`,
+                                       allowOutsideClick: false,
+                                       imageUrl: 'img/aibe.jpg',
+                                       imageHeight: 300,
+                                       confirmButtonText:'熱愛自由的人',
+                                       cancelButtonText: '拘謹守禮的人',
+                                       confirmButtonColor: '#9dbf00',
+                                       cancelButtonColor: '#d33',
+                                       showCancelButton: true, 
+                                       }).then((result)=>{
+                                           if(result.dismiss === 'cancel'){
+                                               loveA=loveA+20;
+                                           }else{
+                                               loveB=loveB+10;
+                                           }
+                                       }).then(function(){
+                                           Swal.fire({
+                                           title: `...第五個問題...`,
+                                           text:`女性友人和男性友人，你相處起來哪類更為自在？`,
+                                           allowOutsideClick: false,
+                                           imageUrl: 'img/aibe.jpg',
+                                           imageHeight: 300,
+                                           confirmButtonText:'女性友人',
+                                           cancelButtonText: '男性友人',
+                                           confirmButtonColor: '#9dbf00',
+                                           cancelButtonColor: '#d33',
+                                           showCancelButton: true, 
+                                           }).then((result)=>{
+                                               if(result.dismiss === 'cancel'){
+                                                   male=male+10;
+                                               }else{
+                                                   female=female+10;
+                                               }
+                                           }).then(function(){
+                                               Swal.fire({
+                                               title: `...最後一個問題...`,
+                                               text:`你是個早睡早起，愛美的孩子嗎？`,
+                                               allowOutsideClick: false,
+                                               imageUrl: 'img/aibe.jpg',
+                                               imageHeight: 300,
+                                               confirmButtonText:'是',
+                                               cancelButtonText: '不是',
+                                               confirmButtonColor: '#9dbf00',
+                                               cancelButtonColor: '#d33',
+                                               showCancelButton: true, 
+                                               }).then((result)=>{
+                                                   if(result.dismiss === 'cancel'){
+                                                       male=male+10;
+                                                   }else{
+                                                       female=female+10;
+                                                   }
+                                               }).then(function(){
+                                                   if(male == 20 && loveA > loveB){
+                                                       
+                                                       Swal.fire({
+                                                       title: `你成為了英勇的男騎士`,
+                                                       text:`遠方的僕人看見了你，匆匆揮手道：「${name}將軍，公主殿下在找您呢！」`,
+                                                       allowOutsideClick: false,
+                                                       imageUrl: 'img/mankight.jpg',
+                                                       imageHeight: 300,
+                                                       confirmButtonText:'知道了！',
+                                                       confirmButtonColor: '#9dbf00',
+                                                       }).then(function(){
+                                                           Swal.fire({
+                                                           title: `我親愛的將軍大人~~`,
+                                                           text:`在一段時間的努力之後，你成為了足以匹配公主的男人，在你的呵護下，公主與騎士的童話真的存在`,
+                                                           allowOutsideClick: false,
+                                                           imageUrl: 'img/man_love_end1.jpg',
+                                                           imageHeight: 300,
+                                                           confirmButtonText:'我會用盡一生呵護妳，妳永遠是我的瑰寶',
+                                                           confirmButtonColor: '#9dbf00',
+                                                           });
+                                                       })
+                                                   }
+                                                   else if(male == 20 && (loveB+40) > loveA){
+                                                           Swal.fire({
+                                                           title: `你成為了英勇的男騎士`,
+                                                           text:`${name}快來，你看看這是什麼？`,
+                                                           allowOutsideClick: false,
+                                                           imageUrl: 'img/mankight.jpg',
+                                                           imageHeight: 300,
+                                                           confirmButtonText:'嗯...?我來瞧瞧，妳可別亂動。',
+                                                           confirmButtonColor: '#9dbf00',
+                                                           }).then(function(){
+                                                               Swal.fire({
+                                                               title: `平凡又簡單的生活`,
+                                                               text:`你輕揉著身旁這個愛笑女孩的頭髮，和村長妹妹日久生情的你，願用一生守護她的笑容`,
+                                                               allowOutsideClick: false,
+                                                               imageUrl: 'img/man_love_end2.jpg',
+                                                               imageHeight: 300,
+                                                               confirmButtonText:'有妳的日子，每天都簡單卻不平凡',
+                                                               confirmButtonColor: '#9dbf00',
+                                                               });
+                                                           })
+                                                   }else if(female == 20 && loveA > loveB){
+                                                           Swal.fire({
+                                                           title: `妳成為了不讓鬚眉的女騎士`,
+                                                           text:`${name}，小心點，妳碰傷了我可是會心疼的`,
+                                                           allowOutsideClick: false,
+                                                           imageUrl: 'img/femaleknight.jpg',
+                                                           imageHeight: 300,
+                                                           confirmButtonText:'雖然嫁給你了，但我仍然是皇城的騎士，沒有那麼嬌貴的',
+                                                           confirmButtonColor: '#9dbf00',
+                                                           }).then(function(){
+                                                               Swal.fire({
+                                                               title: `是是是，我英勇的太子妃`,
+                                                               text:`因為工作和皇太子朝夕相處，雖然突如其來的求婚讓妳措手不及，但是對於皇太子的愛妳銘感於心`,
+                                                               allowOutsideClick: false,
+                                                               imageUrl: 'img/woman_love_end2.jpg',
+                                                               imageHeight: 300,
+                                                               confirmButtonText:'只有你，能讓我安心地賴在你的懷裡',
+                                                               confirmButtonColor: '#9dbf00',
+                                                                });
+                                                           })
+                                                   }else if(female == 20 && (loveB+40) > loveA){
+                                                           Swal.fire({
+                                                           title: `妳成為了不讓鬚眉的女騎士`,
+                                                           text:`${name}，累了嗎？讓我為妳鬆鬆筋骨吧！可別趁我不注意時又添新傷口了！`,
+                                                           allowOutsideClick: false,
+                                                           imageUrl: 'img/femaleknight.jpg',
+                                                           imageHeight: 300,
+                                                           confirmButtonText:'呵~你每天都這麼擔憂~不累嗎？',
+                                                           confirmButtonColor: '#9dbf00',
+                                                           }).then(function(){
+                                                               Swal.fire({
+                                                               title: `雖然我無法保家衛國，但我能用心守護妳一人就滿足了`,
+                                                               text:`村長伸手揉了揉妳的肩膀，讓妳舒服地靠在他的肩上睡著了，原來最初的原點，也是妳愛情的起點`,
+                                                               allowOutsideClick: false,
+                                                               imageUrl: 'img/woman_love_end2.jpg',
+                                                               imageHeight: 300,
+                                                               confirmButtonText:'有你‧真好',
+                                                               confirmButtonColor: '#9dbf00',
+                                                                });
+                                                           })
+                                                   }else{
+                                                           Swal.fire({
+                                                           title: `你成為了英勇的男騎士`,
+                                                           text:`你倏地想起了那日被你放走的倩影.....`,
+                                                           allowOutsideClick: false,
+                                                           imageUrl: 'img/mankight.jpg',
+                                                           imageHeight: 300,
+                                                           confirmButtonText:'去神宮附近看看吧',
+                                                           confirmButtonColor: '#9dbf00',
+                                                           }).then(function(){
+                                                               Swal.fire({
+                                                               title: `「是你！」「是妳？」`,
+                                                               text:`一生未曾過得安穩的她，輕輕靠在你的胸膛，你突然發現了自己想要守護的渴望`,
+                                                               allowOutsideClick: false,
+                                                               imageUrl: 'img/man_love_end3.jpg',
+                                                               imageHeight: 300,
+                                                               confirmButtonText:'如果在我身邊能讓妳幸福，請讓我成為那個男人吧！',
+                                                               confirmButtonColor: '#9dbf00',
+                                                                });
+                                                           })
+                                                   }
+                                               })
+                                           })
+                                       })
+                                   })
+                               })
+                           })
+                       })
+                   })
+               })
+   
+   
+    }
+   
+   
+
+             
+
+
+                
+                
+</script>
+
+</body>
+</html>
